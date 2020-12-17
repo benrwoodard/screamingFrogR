@@ -81,7 +81,7 @@ sfr_command <- function(
     c$file_com <- paste0("cd ", Sys.getenv("S_FROG_PATH"), "\n",
                          " ScreamingFrogSEOSpiderCli.exe ")
   } else {
-    c$file_com <- "unset DISPLAY; screamingfrogseospider "
+    c$file_com <- 'open "/Applications/Screaming Frog SEO Spider.app" --args '
   }
 
 
@@ -101,22 +101,12 @@ sfr_command <- function(
     c$output_folder_com <- glue("--output-folder {output_folder}")
   }
 
-
-  # commands preparation: timestamped_output ----------------------------------
-  if (timestamped_output) {
-    c$timestamped_output_com <- "--timestamped-output"
+  # commands preparation: headless --------------------------------------------
+  if (headless) {
+    c$headless_com <- "--headless"
   } else {
-    c$timestamped_output_com <- NULL
+    c$headless_com <- NULL
   }
-
-
-  # commands preparation: format ----------------------------------------------
-  if (!is.null(format)) {
-    c$format_com <- glue("--export-format {format}")
-  } else {
-    c$format_com <- NULL
-  }
-
 
   # commands preparation: save_crawl_file -------------------------------------
   if (save_crawl_file) {
@@ -125,6 +115,19 @@ sfr_command <- function(
     c$save_crawl_file_com <- NULL
   }
 
+  # commands preparation: timestamped_output ----------------------------------
+  if (timestamped_output) {
+    c$timestamped_output_com <- "--timestamped-output"
+  } else {
+    c$timestamped_output_com <- NULL
+  }
+
+  # commands preparation: format ----------------------------------------------
+  if (!is.null(format)) {
+    c$format_com <- glue("--export-format {format}")
+  } else {
+    c$format_com <- NULL
+  }
 
   # commands preparation: export_tabs -----------------------------------------
   if (!is.null(export_tabs)) {
@@ -132,7 +135,6 @@ sfr_command <- function(
   } else {
     c$export_tabs_com <- NULL
   }
-
 
   # commands preparation: export_bulk -----------------------------------------
   if (!is.null(export_bulk)) {
@@ -153,13 +155,6 @@ sfr_command <- function(
     c$overwrite_com <- "--overwrite"
   } else {
     c$overwrite_com <- NULL
-  }
-
-  # commands preparation: headless --------------------------------------------
-  if (headless) {
-    c$headless_com <- "--headless"
-  } else {
-    c$headless_com <- NULL
   }
 
   # commands preparation: config ----------------------------------------------
