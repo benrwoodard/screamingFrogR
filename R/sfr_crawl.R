@@ -7,6 +7,7 @@
 #'     Single URL will trigger domain-crawl mode (starting from the provided
 #'     URL); vector of URLs will trigger list-crawl mode - only provided URLs
 #'     will be crawled
+#' @param url_list provide a character vector or list of URLs or the full url of the...
 #' @param output_folder string. The path to folder in which the output reports
 #'     will be stored. If NULL it will create the reports into current working
 #'     directory. Defaults to NULL
@@ -65,7 +66,8 @@
 #'
 #' @examples
 sfr_crawl <- function(
-  url,
+  url                       = NULL,
+  url_list                  = NULL,
   output_folder             = NULL,
   timestamped_output        = FALSE,
   export_tabs               = NULL,
@@ -86,14 +88,13 @@ sfr_crawl <- function(
 ) {
   # safety net ----------------------------------------------------------------
   assert_that(
-    is.character(url) & not_empty(url) & !is.null(url) & noNA(url),
+    is.character(url) | is.null(url),
+    is.list(url_list) | is.vector(url_list) | format %in% c("csv", "txt", "xlsx", "xls") | is.null(url_list),
     is.null(output_folder) || is.string(output_folder),
     is.logical(timestamped_output) & noNA(timestamped_output),
     (is.null(export_tabs)   || is.character(export_tabs)), # not_empty(export_tabs),
     (is.null(export_bulk)   || is.character(export_bulk)),# & not_empty(export_bulk),
     (is.null(export_report) || is.character(export_report)), # & not_empty(export_report),
-    not_empty(url) & !is.null(url) & noNA(url) &
-      format %in% c("csv", "xlsx", "xls"),
     is.logical(save_crawl_file) & noNA(save_crawl_file),
     is.logical(overwrite) & noNA(overwrite),
     is.logical(headless) & noNA(headless),
@@ -108,7 +109,7 @@ sfr_crawl <- function(
   )
 
   # building command ----------------------------------------------------------
-  command <- sfr_command(url = url, output_folder = output_folder,
+  command <- sfr_command(url = url, url_list = url_list, output_folder = output_folder,
     timestamped_output = timestamped_output, format = format,
     save_crawl_file = save_crawl_file, export_tabs = export_tabs,
     export_bulk = export_bulk, export_report = export_report,
@@ -123,7 +124,7 @@ sfr_crawl <- function(
   if (grepl("Windows", Sys.info()['sysname'])) {
     system2("cmd", input = command)
   } else {
-    system(command)
+    system(command, intern = T, wait = T)
   }
 }
 

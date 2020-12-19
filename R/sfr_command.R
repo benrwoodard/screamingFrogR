@@ -4,6 +4,7 @@
 #'     Single URL will trigger domain-crawl mode (starting from the provided
 #'     URL); vector of URLs will trigger list-crawl mode - only provided URLs
 #'     will be crawled
+#' @param url_list provide a character vector or list of URLs or the full url of the...
 #' @param output_folder string. The path to folder in which the output reports
 #'     will be stored. If NULL it will create the reports into current working
 #'     directory. Defaults to NULL
@@ -50,10 +51,12 @@
 #' @return a character string that contains the command for SF CLI
 #'
 #' @importFrom glue glue
+#' @importFrom utils write.table
 #'
 #' @examples
 sfr_command <- function(
-  url,
+  url                       = NULL,
+  url_list                  = NULL,
   output_folder             = NULL,
   timestamped_output        = NULL,
   format                    = "csv", # "csv" "xls" "xlsx"
@@ -84,13 +87,23 @@ sfr_command <- function(
     c$file_com <- 'open "/Applications/Screaming Frog SEO Spider.app" --args '
   }
 
-
   # commands preparation: url -------------------------------------------------
-  if (length(url) > 1) {
-    c$crawl_com <- glue("--crawl-list {paste(url, collapse = ' ')}")
+  if (!is.null(url)) {
+    c$crawl_com <- glue::glue("--crawl {url}")
+  } else if (!is.null(url_list)) {
+    class(url_list)
+    if(is.vector(url_list) | is.list(url_list)) {
+      urllist <- as.vector(url_list)
+      output_folder <- paste0(getwd(), "/")
+      c$crawl_com <- glue::glue("--crawl-list '{output_folder}urls.txt'")
+    } else if (url_list %>% format %in% c("csv", "txt", "xlsx", "xls")){
+      utils::write.table(url_list, 'urls.txt', row.names = FALSE, col.names = FALSE, quote = FALSE)
+      c$crawl_com <- glue::glue("--crawl-list '{url_list}'")
+    }
   } else {
-    c$crawl_com <- glue("--crawl {url}")
+    stop('Either "url" or "url_list" must be provided')
   }
+
 
 
   # commands preparation: output folder ---------------------------------------
