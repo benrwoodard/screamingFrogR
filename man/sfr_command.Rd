@@ -4,19 +4,35 @@
 \alias{sfr_command}
 \title{Create the command to Screaming Frog CLI for execution}
 \usage{
-sfr_command(url, output_folder = NULL, timestamped_output = NULL,
-  format = "csv", save_crawl_file = TRUE, export_tabs = NULL,
-  export_bulk = NULL, export_report = NULL, overwrite = TRUE,
-  headless = TRUE, config = NULL, create_sitemap = FALSE,
-  create_images_sitemap = FALSE, use_majestic = NULL,
-  use_mozscape = NULL, use_ahrefs = NULL,
-  use_google_analytics = NULL, use_google_search_console = NULL)
+sfr_command(
+  url = NULL,
+  url_list = NULL,
+  output_folder = NULL,
+  timestamped_output = NULL,
+  format = "csv",
+  save_crawl_file = TRUE,
+  export_tabs = NULL,
+  export_bulk = NULL,
+  export_report = NULL,
+  overwrite = TRUE,
+  headless = TRUE,
+  config = NULL,
+  create_sitemap = FALSE,
+  create_images_sitemap = FALSE,
+  use_majestic = NULL,
+  use_mozscape = NULL,
+  use_ahrefs = NULL,
+  use_google_analytics = NULL,
+  use_google_search_console = NULL
+)
 }
 \arguments{
 \item{url}{string or vector of strings. What should Screaming Frog crawl
 Single URL will trigger domain-crawl mode (starting from the provided
 URL); vector of URLs will trigger list-crawl mode - only provided URLs
 will be crawled}
+
+\item{url_list}{provide a character vector or list of URLs or the full url of the...}
 
 \item{output_folder}{string. The path to folder in which the output reports
 will be stored. If NULL it will create the reports into current working

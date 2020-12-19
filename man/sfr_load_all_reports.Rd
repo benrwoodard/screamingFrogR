@@ -3,7 +3,7 @@
 \name{sfr_load_all_reports}
 \alias{sfr_load_all_reports}
 \title{Load all exported reports, bulk exports or tabs into enviroment as
-    properly named data frames}
+properly named data frames}
 \usage{
 sfr_load_all_reports(output_path)
 }
@@ -16,5 +16,5 @@ data frames from all the spreadsheet files.
 }
 \description{
 Load all exported reports, bulk exports or tabs into enviroment as
-    properly named data frames
+properly named data frames
 }

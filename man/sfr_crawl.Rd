@@ -4,19 +4,35 @@
 \alias{sfr_crawl}
 \title{Run a SEO crawl with Screaming Frog SEO Crawler and choose what to export}
 \usage{
-sfr_crawl(url, output_folder = NULL, timestamped_output = FALSE,
-  export_tabs = NULL, export_bulk = NULL, export_report = NULL,
-  format = "csv", save_crawl_file = FALSE, overwrite = FALSE,
-  headless = TRUE, create_sitemap = FALSE,
-  create_images_sitemap = FALSE, config = NULL, use_majestic = NULL,
-  use_mozscape = NULL, use_ahrefs = NULL,
-  use_google_analytics = NULL, use_google_search_console = NULL)
+sfr_crawl(
+  url = NULL,
+  url_list = NULL,
+  output_folder = NULL,
+  timestamped_output = FALSE,
+  export_tabs = NULL,
+  export_bulk = NULL,
+  export_report = NULL,
+  format = "csv",
+  save_crawl_file = FALSE,
+  overwrite = FALSE,
+  headless = TRUE,
+  create_sitemap = FALSE,
+  create_images_sitemap = FALSE,
+  config = NULL,
+  use_majestic = NULL,
+  use_mozscape = NULL,
+  use_ahrefs = NULL,
+  use_google_analytics = NULL,
+  use_google_search_console = NULL
+)
 }
 \arguments{
 \item{url}{string or vector of strings. What should Screaming Frog crawl
 Single URL will trigger domain-crawl mode (starting from the provided
 URL); vector of URLs will trigger list-crawl mode - only provided URLs
 will be crawled}
+
+\item{url_list}{provide a character vector or list of URLs or the full url of the...}
 
 \item{output_folder}{string. The path to folder in which the output reports
 will be stored. If NULL it will create the reports into current working
@@ -78,18 +94,18 @@ crawl}
 }
 \value{
 spreadsheet files in choosen directory with the reports and/or the
-   crawl file itself
+crawl file itself
 }
 \description{
 Function is a wrapper to Screaming Frog CLI program in
-    versions 10+. It lets performing SEO crawl and exporting results.
+versions 10+. It lets performing SEO crawl and exporting results.
 }
 \details{
 This package requires Screaming Frog version 10.0 or above.
 
-   Crawler requires accepting the EULA and some features need to be
-   activated by providing the license.
+Crawler requires accepting the EULA and some features need to be
+activated by providing the license.
 
-   For more information, see:
-   https://www.screamingfrog.co.uk/seo-spider/user-guide/general/
+For more information, see:
+https://www.screamingfrog.co.uk/seo-spider/user-guide/general/
 }

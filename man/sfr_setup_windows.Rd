@@ -20,9 +20,9 @@ Function to setup the Screaming Frog on Windows systems
 \details{
 This package requires Screaming Frog version 10.0 or above.
 
-  Crawler requires accepting the EULA and some features need to be
-  activated by providing the license.
+Crawler requires accepting the EULA and some features need to be
+activated by providing the license.
 
-  For more information, see:
-  https://www.screamingfrog.co.uk/seo-spider/user-guide/general/
+For more information, see:
+https://www.screamingfrog.co.uk/seo-spider/user-guide/general/
 }
