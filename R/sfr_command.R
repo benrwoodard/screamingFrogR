@@ -49,7 +49,7 @@
 #'    crawl
 #'
 #' @return a character string that contains the command for SF CLI
-#'
+#' @importFrom magrittr %>%
 #' @importFrom glue glue
 #' @importFrom utils write.table
 #'
@@ -88,17 +88,19 @@ sfr_command <- function(
   }
 
   # commands preparation: url -------------------------------------------------
-  if (!is.null(url)) {
+  if (!is.null(url) & !is.null(url_list)) {
+    stop('Use arguments either "url" or "url_list", not both.')
+  } else if (!is.null(url)) {
     c$crawl_com <- glue::glue("--crawl {url}")
   } else if (!is.null(url_list)) {
-    class(url_list)
-    if(is.vector(url_list) | is.list(url_list)) {
-      urllist <- as.vector(url_list)
+    if(length(url_list) > 1) {
+      url_list <- as.vector(url_list)
+      utils::write.table(url_list, 'urls.txt', row.names = FALSE, col.names = FALSE, quote = FALSE)
       output_folder <- paste0(getwd(), "/")
       c$crawl_com <- glue::glue("--crawl-list '{output_folder}urls.txt'")
-    } else if (url_list %>% format %in% c("csv", "txt", "xlsx", "xls")){
-      utils::write.table(url_list, 'urls.txt', row.names = FALSE, col.names = FALSE, quote = FALSE)
-      c$crawl_com <- glue::glue("--crawl-list '{url_list}'")
+    } else if (length(url_list) == 1 ){
+      output_folder <- paste0(getwd(), "/")
+      c$crawl_com <- glue::glue("--crawl-list '{output_folder}{url_list}'")
     }
   } else {
     stop('Either "url" or "url_list" must be provided')
