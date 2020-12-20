@@ -52,7 +52,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom glue glue
 #' @importFrom utils write.table
-#'
+#' @export
 sfr_command <- function(
   url                       = NULL,
   url_list                  = NULL,
