@@ -10,7 +10,6 @@
 #' @importFrom data.table fread
 #' @importFrom readxl read_excel
 #'
-#' @examples
 sfr_load_all_reports <- function(output_path) {
 
   # csv -----------------------------------------------------------------------

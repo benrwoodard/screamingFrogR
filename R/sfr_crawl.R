@@ -64,7 +64,6 @@
 #'    crawl file itself
 #' @export
 #'
-#' @examples
 sfr_crawl <- function(
   url                       = NULL,
   url_list                  = NULL,

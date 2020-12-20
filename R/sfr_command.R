@@ -53,7 +53,6 @@
 #' @importFrom glue glue
 #' @importFrom utils write.table
 #'
-#' @examples
 sfr_command <- function(
   url                       = NULL,
   url_list                  = NULL,

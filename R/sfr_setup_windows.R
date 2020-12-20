@@ -17,7 +17,6 @@
 #'
 #' @import assertthat
 #'
-#' @examples
 sfr_setup_windows <- function(path) {
   # safety net ----------------------------------------------------------------
   assert_that(is.string(path), not_empty(path), noNA(path))
