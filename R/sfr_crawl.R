@@ -124,7 +124,7 @@ sfr_crawl <- function(
   if (grepl("Windows", Sys.info()['sysname'])) {
     system2("cmd", input = command)
   } else {
-    system(command, intern = T, wait = T)
+    system(command)
   }
 }
 
