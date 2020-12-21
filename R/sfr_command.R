@@ -83,7 +83,7 @@ sfr_command <- function(
     c$file_com <- paste0("cd ", Sys.getenv("S_FROG_PATH"), "\n",
                          " ScreamingFrogSEOSpiderCli.exe ")
   } else {
-    c$file_com <- 'open "/Applications/Screaming Frog SEO Spider.app" --args '
+    c$file_com <-  glue::glue('open \'/Applications/Screaming Frog SEO Spider.app\' --args ')
   }
 
   # commands preparation: url -------------------------------------------------
