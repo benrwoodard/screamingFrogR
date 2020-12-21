@@ -89,10 +89,10 @@ sfr_command <- function(
   # commands preparation: url -------------------------------------------------
   if (!is.null(url) & !is.null(url_list)) {
     stop('Use arguments either "url" or "url_list", not both.')
-  } else if (!is.null(url)) {
+  } else if (!is.null(url) & is.null(url_list)) {
     c$crawl_com <- glue::glue("--crawl {url}")
-  } else if (!is.null(url_list)) {
-    if(length(url_list) > 1) {
+  } else if (!is.null(url_list) & is.null(url)) {
+    if (length(url_list) > 1) {
       url_list <- as.vector(url_list)
       utils::write.table(url_list, 'urls.txt', row.names = FALSE, col.names = FALSE, quote = FALSE)
       output_folder <- paste0(getwd(), "/")
@@ -105,8 +105,6 @@ sfr_command <- function(
     stop('Either "url" or "url_list" must be provided')
   }
 
-
-
   # commands preparation: output folder ---------------------------------------
   if (!is.null(output_folder)) {
     c$output_folder_com <- glue("--output-folder {output_folder}")
@@ -114,7 +112,7 @@ sfr_command <- function(
     output_folder <- paste0(getwd(), "/")
     c$output_folder_com <- glue("--output-folder {output_folder}")
   }
-
+#
   # commands preparation: headless --------------------------------------------
   if (headless) {
     c$headless_com <- "--headless"
